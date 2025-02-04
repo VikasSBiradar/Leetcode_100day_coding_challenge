@@ -1,0 +1,38 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+public class Solution {
+    int carry = 0;
+    public ListNode DoubleIt(ListNode head) {
+        head = DoubleItHelper(head);
+        if(carry > 0)
+        {
+            head = new ListNode(carry, head);
+        }
+        return head;
+
+    }
+
+    public ListNode DoubleItHelper(ListNode head)
+    {
+        if(head == null)
+        {
+            return head;
+        }
+
+        DoubleItHelper(head.next);
+        var dbl = head.val * 2 + carry;
+        carry = dbl / 10;
+        head.val = dbl%10;
+
+        return head;
+    }
+}
